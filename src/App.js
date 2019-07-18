@@ -6,10 +6,10 @@ import { fetchCategories, fetchRecords } from './philPapersAPI';
 export const App = () => {
   const [ state, setState ] = useState();
   console.log(state);
+
   useEffect(() => {
-    fetchCategories()
-      .then(results => results.json())
-      .then(setState);
+    fetchCategories().then(setState);
+    fetchRecords();
   }, []);
 
   return (
@@ -20,19 +20,11 @@ export const App = () => {
           {state && state.map
             ? state
               .map(array => array[0])
-              .sort()
+              .slice(0, 20)
               .join(', ')
             : null
           }
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
