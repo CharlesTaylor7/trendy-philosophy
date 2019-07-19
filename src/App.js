@@ -9,7 +9,7 @@ export const App = () => {
 
   useEffect(() => {
     fetchCategories().then(setState);
-    fetchRecords();
+    // fetchRecords();
   }, []);
 
   return (

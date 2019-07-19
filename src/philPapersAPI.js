@@ -1,10 +1,28 @@
 import parser from 'fast-xml-parser';
-import { take, map, delay, mergeAll } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { fromFetch } from 'rxjs/fetch';
+import * as Rx from 'rxjs/operators';
+const xml = parser;
 
-export const fetchRecords = () => fetch(`https://philpapers.org/oai.pl?verb=ListRecords&metadataPrefix=oai_dc`)
-  .then(response => response.text())
-  .then(text => parser.parse(text))
-  .then(console.log);
+const regex = /[A-Z0-9-]+$/;
+const getRecordId = record => record.header.identifier.match(regex)[0];
+
+export const records$ = fromFetch(`https://philpapers.org/oai.pl?verb=ListRecords&metadataPrefix=oai_dc`)
+  .pipe(
+    Rx.flatMap(response => response.text()),
+    Rx.flatMap(text => {
+      const { record, resumptionToken } = xml.parse(text)['OAI-PMH'].ListRecords;
+
+      return record;
+    }),
+    Rx.map(getRecordId),
+    Rx.map(console.log)
+  );
+
+records$.subscribe({
+  next: result => console.log(result),
+  complete: () => console.log('done')
+})
 
 const apiId = '904518';
 const apiKey = '5KLo4qkvXNl4t8s5';
