@@ -5,10 +5,9 @@ import { fetchCategories, fetchRecords } from './philPapersAPI';
 
 export const App = () => {
   const [ state, setState ] = useState();
-  console.log(state);
 
   useEffect(() => {
-    fetchCategories().then(setState);
+    // fetchCategories().then(setState);
     // fetchRecords();
   }, []);
 
