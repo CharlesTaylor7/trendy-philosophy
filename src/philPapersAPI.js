@@ -5,9 +5,6 @@ import * as Observable from 'rxjs';
 
 const xml = parser;
 
-const regex = /[A-Z0-9-]+$/;
-const getRecordId = record => record.header.identifier.match(regex)[0];
-
 const escapeCharacter = char => {
   switch (char) {
     case '/': return '%2F';
@@ -24,7 +21,7 @@ const escapeCharacter = char => {
 };
 const escape = token => token.split().map(escapeCharacter).join();
 
-const nextRecordSet$ = (token) => fromFetch(`https://philpapers.org/oai.pl?verb=ListRecords&metadataPrefix=oai_dc${token ? `&resumptionToken=${escape(token)}` : ''}`)
+const recordSet$ = (token) => fromFetch(`https://philpapers.org/oai.pl?verb=ListRecords&metadataPrefix=oai_dc${token ? `&resumptionToken=${escape(token)}` : ''}`)
   .pipe(
     Rx.flatMap(response => response.text()),
     Rx.flatMap(text => {
@@ -32,22 +29,28 @@ const nextRecordSet$ = (token) => fromFetch(`https://philpapers.org/oai.pl?verb=
         record: records,
         resumptionToken,
       } = xml.parse(text)['OAI-PMH'].ListRecords;
-      return Observable.merge(
+      return Observable.concat(
         Observable.from(records),
-        nextRecordSet$(resumptionToken)
+        recordSet$(resumptionToken)
       );
     })
   );
 
-const record$ = nextRecordSet$()
+const regex = /[A-Z0-9-]+$/;
+const getRecordId = record => record.header.identifier.match(regex)[0];
+
+const word$ = recordSet$()
   .pipe(
     Rx.map(getRecordId),
+    Rx.flatMap(id => fromFetch(`https://philpapers.org/archive/${id}`)),
+    Rx.flatMap(doc => doc.text()),
+    Rx.flatMap(text => text.split(' ')),
+    Rx.take(1)
   );
-
-record$.subscribe({
+word$.subscribe({
   next: result => console.log(result),
   complete: () => console.log('done')
-})
+});
 
 const apiId = '904518';
 const apiKey = '5KLo4qkvXNl4t8s5';
