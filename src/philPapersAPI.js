@@ -39,21 +39,19 @@ const recordSet$ = (token) => fromFetch(`https://philpapers.org/oai.pl?verb=List
 const regex = /[A-Z0-9-]+$/;
 const getRecordId = record => record.header.identifier.match(regex)[0];
 
-const word$ = recordSet$()
+// ToDo: Figure out how to parse and decompress data from archive.
+const getDoc = id => fromFetch(`https://philpapers.org/archive/${id}`);
+
+export const record$ = recordSet$()
   .pipe(
-    Rx.map(getRecordId),
-    Rx.flatMap(id => fromFetch(`https://philpapers.org/archive/${id}`)),
-    Rx.flatMap(doc => doc.text()),
-    Rx.flatMap(text => text.split(' ')),
-    Rx.take(1)
+    Rx.map(getRecordId)
   );
-word$.subscribe({
-  next: result => console.log(result),
-  complete: () => console.log('done')
-});
 
 const apiId = '904518';
 const apiKey = '5KLo4qkvXNl4t8s5';
 
-export const fetchCategories = () => fetch(`https://philpapers.org/philpapers/raw/categories.json?apiId=${apiId}&apiKey=${apiKey}`)
-  .then(response => response.json());
+export const category$ = fromFetch(`https://philpapers.org/philpapers/raw/categories.json?apiId=${apiId}&apiKey=${apiKey}`)
+  .pipe(
+    Rx.flatMap(response.json()),
+    Rx.map(array => array[0])
+  );
