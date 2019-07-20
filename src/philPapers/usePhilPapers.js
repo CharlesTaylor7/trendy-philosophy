@@ -12,12 +12,12 @@ export const usePhilPapers = () => {
 
   useEffect(() => {
     record$.subscribe(record => {
-      const blackList = /^([0-9]+|the|of|on|and|to|in|at|for)$/
+      const blackList = /^([0-9]+|s|the|of|on|and|to|in|at|for)$/
       const words = R.pipe(
         R.prop('title'),
-        R.split(/[\s,.\-_]/),
+        R.split(/[\s,.\-_'’]/),
         R.map(stem),
-        R.filter(R.pipe(R.match(blackList), R.isEmpty)),
+        R.filter(stem => !R.isEmpty(stem) && R.isEmpty(R.match(blackList, stem))),
         R.uniq,
       )(record);
 

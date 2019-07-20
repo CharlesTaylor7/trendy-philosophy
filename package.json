@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "chart.js": "^2.8.0",
     "fast-xml-parser": "^3.12.17",
     "lancaster-stemmer": "^1.0.4",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
-    "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
+    "recharts": "^1.6.2",
     "rxjs": "^6.5.2"
   },
   "scripts": {

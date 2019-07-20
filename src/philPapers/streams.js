@@ -65,7 +65,11 @@ const getRecordMetadata = record => {
 export const record$ = recordSet$()
   .pipe(
     Rx.map(getRecordMetadata),
-    Rx.filter(record => record.language === 'en' && record.title),
+    Rx.filter(record =>
+      record.language === 'en' &&
+      record.title &&
+      typeof record.date === 'number'
+    ),
   );
 
 // ToDo: Figure out how to parse and decompress data from archive.
