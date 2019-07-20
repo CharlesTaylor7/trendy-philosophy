@@ -6,19 +6,17 @@ import * as R from 'ramda';
 import stem from 'lancaster-stemmer';
 
 export const App = () => {
-  // state: { [stem: string]: RecordId[] }
+  // state: { lookup: { [stem: string]: RecordId[] }, recordCount: number }
   // where RecordId = string
   // a map from word stems to a list of records containing that stem.
   // The frequency of a stem is size of its dictionary entry divided by the record count.
-  const [ state, setState ] = useState({});
-  const [ recordCount, setRecordCount ] = useState(0);
+  const [ state, setState ] = useState({ lookup: {}, recordCount: 0 });
 
-  console.log(recordCount)
-  console.log(JSON.stringify(state));
+  console.log(state.recordCount);
 
   useEffect(() => {
     record$.subscribe(record => {
-      const blackList = /^(the|of|on|and|to|in)$/
+      const blackList = /^(the|of|on|and|to|in|[0-9]+)$/
       const words = R.pipe(
         R.prop('title'),
         R.split(/[\s,.\-_]/),
@@ -28,7 +26,8 @@ export const App = () => {
       )(record);
 
       setState(state => {
-        const copy = { ...state };
+        const { lookup, recordCount } = state;
+        const copy = { ...lookup };
         for (const word of words) {
           if (copy[word] === undefined) {
             copy[word] = [record.id];
@@ -36,9 +35,8 @@ export const App = () => {
             copy[word] = [...copy[word], record.id];
           }
         }
-        return copy;
+        return { lookup, recordCount: recordCount + 1 }
       });
-      setRecordCount(count => count + 1);
     });
   }, []);
 

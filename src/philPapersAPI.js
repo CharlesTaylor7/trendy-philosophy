@@ -2,6 +2,7 @@ import parser from 'fast-xml-parser';
 import { fromFetch } from 'rxjs/fetch';
 import * as Rx from 'rxjs/operators';
 import * as Observable from 'rxjs';
+import * as R from 'ramda';
 
 const xml = parser;
 
@@ -30,28 +31,43 @@ const recordSet$ = (token) => fromFetch(`https://philpapers.org/oai.pl?verb=List
         resumptionToken,
       } = xml.parse(text)['OAI-PMH'].ListRecords;
 
-      return records;
-      // return Observable.concat(
-      //   Observable.from(records),
-      //   recordSet$(resumptionToken)
-      // );
+      // return records;
+      return Observable.concat(
+        Observable.from(records),
+        recordSet$(resumptionToken)
+      );
     })
   );
 
-const regex = /[A-Z0-9-]+$/;
-const getRecordId = record => record.header.identifier.match(regex)[0];
-const getRecordTitle = record => record.metadata["oai_dc:dc"]["dc:title"];
+const idRegex = /[A-Z0-9-]+$/;
+const lastWordRegex = /\w+$/;
+const getRecordMetadata = record => {
+  const metadata = {};
+  for (const [key, value] of Object.entries(record.metadata['oai_dc:dc'])) {
+    const shortenedKey = key.match(lastWordRegex)[0];
+    metadata[shortenedKey] = value;
+  }
+  metadata.title = metadata.title ? String(metadata.title) : null;
+  metadata.id = metadata.identifier.match(idRegex)[0];
+  delete metadata.identifier;
 
-// ToDo: Figure out how to parse and decompress data from archive.
-const getDoc = id => fromFetch(`https://philpapers.org/archive/${id}`);
+  metadata.type = metadata.type.match(lastWordRegex)[0];
+
+  if (metadata.subject !== 'Philosophy'){
+    console.log(JSON.stringify(metadata));
+    debugger;
+  }
+  return metadata;
+}
 
 export const record$ = recordSet$()
   .pipe(
-    Rx.map(record => ({
-      id: getRecordId(record),
-      title: getRecordTitle(record),
-    })),
+    Rx.map(getRecordMetadata),
+    Rx.filter(record => record.language === 'en' && record.title),
   );
+
+// ToDo: Figure out how to parse and decompress data from archive.
+const getDoc = id => fromFetch(`https://philpapers.org/archive/${id}`);
 
 const apiId = '904518';
 const apiKey = '5KLo4qkvXNl4t8s5';
