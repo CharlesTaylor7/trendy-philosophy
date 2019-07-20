@@ -39,19 +39,21 @@ const recordSet$ = (token) => fromFetch(`https://philpapers.org/oai.pl?verb=List
     })
   );
 
-const idRegex = /[A-Z0-9-]+$/;
-const lastWordRegex = /\w+$/;
+const getLastPartOfPath = path => path.match(/\/(?<key>.*)$/).groups.key;
+const getPropName = dcPropName => dcPropName.match(/^dc:(?<prop>\w+)$/).groups.prop;
+
 const getRecordMetadata = record => {
   const metadata = {};
   for (const [key, value] of Object.entries(record.metadata['oai_dc:dc'])) {
-    const shortenedKey = key.match(lastWordRegex)[0];
-    metadata[shortenedKey] = value;
+    const prop = getPropName(key);
+    metadata[prop] = value;
   }
+
   metadata.title = metadata.title ? String(metadata.title) : null;
-  metadata.id = metadata.identifier.match(idRegex)[0];
+  metadata.id = getLastPartOfPath(metadata.identifier);
   delete metadata.identifier;
 
-  metadata.type = metadata.type.match(lastWordRegex)[0];
+  metadata.type = getLastPartOfPath(metadata.type);
 
   if (metadata.subject !== 'Philosophy'){
     console.log(JSON.stringify(metadata));

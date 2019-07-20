@@ -1,9 +1,9 @@
 ## To Do
-- Test capacity of browser
-- Figure out time to load
+- Graph Frequency of a single static word.
 
 ## Measurements
-- 100 records takes about 21.8 kB
+- 100 records takes about 21.8 kB.
+- Takes about 1 second to make a rountrip request for 100 records.
 
 ## Available Scripts
 
