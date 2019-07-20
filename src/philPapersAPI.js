@@ -38,13 +38,18 @@ const recordSet$ = (token) => fromFetch(`https://philpapers.org/oai.pl?verb=List
 
 const regex = /[A-Z0-9-]+$/;
 const getRecordId = record => record.header.identifier.match(regex)[0];
+const getRecordTitle = record => record.metadata.oai_dc.title;
 
 // ToDo: Figure out how to parse and decompress data from archive.
 const getDoc = id => fromFetch(`https://philpapers.org/archive/${id}`);
 
 export const record$ = recordSet$()
   .pipe(
-    Rx.map(getRecordId)
+    Rx.map(record => ({
+      ...record,
+      id: getRecordId(record),
+      title: getRecordTitle(record),
+    })),
   );
 
 const apiId = '904518';
