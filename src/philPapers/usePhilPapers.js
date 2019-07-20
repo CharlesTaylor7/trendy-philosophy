@@ -8,7 +8,7 @@ export const usePhilPapers = () => {
   // where RecordId = string
   // a map from word stems to a list of records containing that stem.
   // The frequency of a stem is size of its dictionary entry divided by the record count.
-  const [ state, setState ] = useState({ lookup: {}, recordCount: 0 });
+  const [ state, setState ] = useState({ stemsToRecords: {}, records: {} });
 
   useEffect(() => {
     record$.subscribe(record => {
@@ -22,8 +22,8 @@ export const usePhilPapers = () => {
       )(record);
 
       setState(state => {
-        const { lookup, recordCount } = state;
-        const copy = { ...lookup };
+        const { stemsToRecords, records } = state;
+        const copy = { ...stemsToRecords };
         for (const word of words) {
           if (copy[word] === undefined) {
             copy[word] = [record.id];
@@ -31,7 +31,8 @@ export const usePhilPapers = () => {
             copy[word] = [...copy[word], record.id];
           }
         }
-        return { lookup, recordCount: recordCount + 1 }
+        const withNewRecord = {...records, [record.id]: record}
+        return { stemsToRecords: copy, records: withNewRecord };
       });
     });
   }, []);
