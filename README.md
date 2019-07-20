@@ -3,7 +3,7 @@
 - Figure out time to load
 
 ## Measurements
-- 100 records takes about 24.7 kB
+- 100 records takes about 21.8 kB
 
 ## Available Scripts
 

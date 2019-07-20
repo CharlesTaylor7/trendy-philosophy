@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { record$ } from './philPapersAPI';
 import * as R from 'ramda';
+import stem from 'lancaster-stemmer';
 
 export const App = () => {
   // state: { [stem: string]: RecordId[] }
@@ -12,13 +13,17 @@ export const App = () => {
   const [ state, setState ] = useState({});
   const [ recordCount, setRecordCount ] = useState(0);
 
+  console.log(recordCount)
+  console.log(JSON.stringify(state));
+
   useEffect(() => {
     record$.subscribe(record => {
-
+      const blackList = /^(the|of|on|and|to|in)$/
       const words = R.pipe(
         R.prop('title'),
-        R.split(' '),
-        R.map(R.toLower),
+        R.split(/[\s,.\-_]/),
+        R.map(stem),
+        R.filter(R.pipe(R.match(blackList), R.isEmpty)),
         R.uniq,
       )(record);
 
@@ -31,8 +36,6 @@ export const App = () => {
             copy[word] = [...copy[word], record.id];
           }
         }
-        console.log(JSON.stringify(copy));
-        debugger;
         return copy;
       });
       setRecordCount(count => count + 1);

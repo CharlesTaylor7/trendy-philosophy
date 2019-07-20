@@ -48,7 +48,6 @@ const getDoc = id => fromFetch(`https://philpapers.org/archive/${id}`);
 export const record$ = recordSet$()
   .pipe(
     Rx.map(record => ({
-      ...record,
       id: getRecordId(record),
       title: getRecordTitle(record),
     })),
