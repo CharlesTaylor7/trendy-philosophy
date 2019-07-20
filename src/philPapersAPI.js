@@ -29,16 +29,18 @@ const recordSet$ = (token) => fromFetch(`https://philpapers.org/oai.pl?verb=List
         record: records,
         resumptionToken,
       } = xml.parse(text)['OAI-PMH'].ListRecords;
-      return Observable.concat(
-        Observable.from(records),
-        recordSet$(resumptionToken)
-      );
+
+      return records;
+      // return Observable.concat(
+      //   Observable.from(records),
+      //   recordSet$(resumptionToken)
+      // );
     })
   );
 
 const regex = /[A-Z0-9-]+$/;
 const getRecordId = record => record.header.identifier.match(regex)[0];
-const getRecordTitle = record => record.metadata.oai_dc.title;
+const getRecordTitle = record => record.metadata["oai_dc:dc"]["dc:title"];
 
 // ToDo: Figure out how to parse and decompress data from archive.
 const getDoc = id => fromFetch(`https://philpapers.org/archive/${id}`);
@@ -57,6 +59,6 @@ const apiKey = '5KLo4qkvXNl4t8s5';
 
 export const category$ = fromFetch(`https://philpapers.org/philpapers/raw/categories.json?apiId=${apiId}&apiKey=${apiKey}`)
   .pipe(
-    Rx.flatMap(response.json()),
+    Rx.flatMap(response => response.json()),
     Rx.map(array => array[0])
   );

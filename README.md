@@ -2,6 +2,9 @@
 - Test capacity of browser
 - Figure out time to load
 
+## Measurements
+- 100 records takes about 24.7 kB
+
 ## Available Scripts
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

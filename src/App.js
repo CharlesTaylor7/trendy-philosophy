@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { record$ } from './philPapersAPI';
-import R from 'ramda';
+import * as R from 'ramda';
 
 export const App = () => {
   // state: { [stem: string]: RecordId[] }
