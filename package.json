@@ -1,9 +1,11 @@
 {
   "name": "trendy-philosophy",
+  "homepage": "https://charlestaylor7.github.io/trendy-philosophy",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "fast-xml-parser": "^3.12.17",
+    "gh-pages": "^2.0.1",
     "lancaster-stemmer": "^1.0.4",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
@@ -16,7 +18,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
