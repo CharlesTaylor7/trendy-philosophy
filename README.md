@@ -1,5 +1,5 @@
 ## To Do
-- Graph by percentage of hits per year
+- Make query box
 - Figure out CORS everywhere
 - Make smarter requests
 

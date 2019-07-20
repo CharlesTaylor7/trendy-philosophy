@@ -3,7 +3,7 @@ import './App.css';
 import { Graph } from './components/Graph';
 
 export const App = () => {
-  const query = 'folk';
+  const query = 'good';
   return (
     <div className="App">
       <header className="App-header">
