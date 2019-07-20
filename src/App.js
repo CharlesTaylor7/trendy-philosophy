@@ -13,21 +13,27 @@ import * as R from 'ramda';
 import stem from 'lancaster-stemmer';
 
 export const App = () => {
-  const { stemsToRecords, records } = usePhilPapers();
+  const {
+    records,
+    stemsToRecords,
+    yearsToRecords,
+  } = usePhilPapers();
+
   const recordCount = Object.keys(records).length;
   const queryWord = 'problem';
   const recordIds = stemsToRecords[stem(queryWord)];
   const data = recordIds
     ? R.pipe(
         R.map(id => records[id]),
-        R.groupBy(R.prop('date')),
+        R.groupBy(R.prop('year')),
         R.toPairs,
         R.map(([year, group]) => ({
           year,
-          trend: year,
-          count: group.length,
-          amt: group.length,
+          percentage: 100 * group.length / yearsToRecords[year].length,
         })),
+        R.map(dataPoint => {
+          return { ...dataPoint, amt: dataPoint.percentage };
+        })
       )(recordIds)
     : [];
   return (
@@ -37,7 +43,7 @@ export const App = () => {
         <LineChart width={1200} height={500} data={data}>
           <XAxis dataKey="year"/>
           <YAxis />
-          <Line type="monotone" dataKey="count" stroke="#8484d8" />
+          <Line type="monotone" dataKey="percentage" stroke="#8484d8" />
         </LineChart>
       </header>
     </div>

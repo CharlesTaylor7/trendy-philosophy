@@ -1,10 +1,12 @@
 ## To Do
-- Graph Frequency of a single static word.
+- Graph by percentage of hits per year
+- Figure out CORS everywhere
+- Make smarter requests
 
 ## Measurements
 - 100 records takes about 21.8 kB.
 - Takes about 1 second to make a rountrip request for 100 records.
-
+- Browser stops loading data at about 16k records.
 ## Available Scripts
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -53,6 +53,9 @@ const getRecordMetadata = record => {
   metadata.id = getLastPartOfPath(metadata.identifier);
   delete metadata.identifier;
 
+  metadata.year = metadata.date;
+  delete metadata.date;
+
   metadata.type = getLastPartOfPath(metadata.type);
 
   if (metadata.subject !== 'Philosophy'){
@@ -68,7 +71,7 @@ export const record$ = recordSet$()
     Rx.filter(record =>
       record.language === 'en' &&
       record.title &&
-      typeof record.date === 'number'
+      typeof record.year === 'number'
     ),
   );
 
