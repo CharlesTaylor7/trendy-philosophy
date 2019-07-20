@@ -39,7 +39,7 @@ const recordSet$ = (token) => fromFetch(`https://philpapers.org/oai.pl?verb=List
     })
   );
 
-const getLastPartOfPath = path => path.match(/\/(?<key>.*)$/).groups.key;
+const getLastPartOfPath = path => path.match(/^.*\/(?<key>.*)$/).groups.key;
 const getPropName = dcPropName => dcPropName.match(/^dc:(?<prop>\w+)$/).groups.prop;
 
 const getRecordMetadata = record => {
