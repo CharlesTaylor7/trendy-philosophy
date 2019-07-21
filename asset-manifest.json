@@ -1,16 +1,15 @@
 {
   "files": {
     "main.css": "/trendy-philosophy/static/css/main.ba49ec77.chunk.css",
-    "main.js": "/trendy-philosophy/static/js/main.c9513ec1.chunk.js",
-    "main.js.map": "/trendy-philosophy/static/js/main.c9513ec1.chunk.js.map",
+    "main.js": "/trendy-philosophy/static/js/main.e68c76bd.chunk.js",
+    "main.js.map": "/trendy-philosophy/static/js/main.e68c76bd.chunk.js.map",
     "runtime~main.js": "/trendy-philosophy/static/js/runtime~main.ce3a9f8e.js",
     "runtime~main.js.map": "/trendy-philosophy/static/js/runtime~main.ce3a9f8e.js.map",
-    "static/js/2.bc5d941e.chunk.js": "/trendy-philosophy/static/js/2.bc5d941e.chunk.js",
-    "static/js/2.bc5d941e.chunk.js.map": "/trendy-philosophy/static/js/2.bc5d941e.chunk.js.map",
+    "static/js/2.7c13ad10.chunk.js": "/trendy-philosophy/static/js/2.7c13ad10.chunk.js",
+    "static/js/2.7c13ad10.chunk.js.map": "/trendy-philosophy/static/js/2.7c13ad10.chunk.js.map",
     "index.html": "/trendy-philosophy/index.html",
-    "precache-manifest.9dd81f7f4981865585887b2012abb4de.js": "/trendy-philosophy/precache-manifest.9dd81f7f4981865585887b2012abb4de.js",
+    "precache-manifest.6c8f73bf2e761a3b1b82d0f600667988.js": "/trendy-philosophy/precache-manifest.6c8f73bf2e761a3b1b82d0f600667988.js",
     "service-worker.js": "/trendy-philosophy/service-worker.js",
-    "static/css/main.ba49ec77.chunk.css.map": "/trendy-philosophy/static/css/main.ba49ec77.chunk.css.map",
-    "static/media/logo.svg": "/trendy-philosophy/static/media/logo.ee7cd8ed.svg"
+    "static/css/main.ba49ec77.chunk.css.map": "/trendy-philosophy/static/css/main.ba49ec77.chunk.css.map"
   }
 }
