@@ -1,6 +1,5 @@
 ## To Do
 - Make query box
-- Figure out CORS everywhere
 - Make smarter requests
 
 ## Measurements
