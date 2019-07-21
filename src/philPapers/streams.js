@@ -22,7 +22,8 @@ const escapeCharacter = char => {
 };
 const escape = token => token.split().map(escapeCharacter).join();
 
-const recordSet$ = (token) => fromFetch(`https://philpapers.org/oai.pl?verb=ListRecords&metadataPrefix=oai_dc${token ? `&resumptionToken=${escape(token)}` : ''}`)
+const recordSet$ = (token) => fromFetch(
+  `https://cors-anywhere.herokuapp.com/https://philpapers.org/oai.pl?verb=ListRecords&metadataPrefix=oai_dc${token ? `&resumptionToken=${escape(token)}` : ''}`)
   .pipe(
     Rx.flatMap(response => response.text()),
     Rx.flatMap(text => {
