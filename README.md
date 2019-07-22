@@ -1,6 +1,11 @@
 ## To Do
+- Query against paper descriptions in addition to the paper title
+- Implement screen scraping to get the publisher & citation info
 - Make query box
-- Make smarter requests
+- Allow queries to be more than 1 word
+- Make smarter requests of PhilPapers.org
+- Show multiple trend lines
+- Calculate correlations
 
 ## Measurements
 - 100 records takes about 21.8 kB.
