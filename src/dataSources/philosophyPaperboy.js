@@ -13,14 +13,16 @@ export const record$ = fromFetch(`https://thephilosophypaperboy.com`)
     Rx.map(span => {
       const $ = cheerio.load(span);
 
-      const hyperlink = $('a').attr('href');
-
+      const linkTag = $('a');
+      const hyperlink = linkTag.attr('href');
+      const title = linkTag.text();
       const div = $('div');
       const publication = div.find('.feed-source').text();
       const dateText = div.find('.feed-date').text();
       const date = new Date(dateText);
 
       return ({
+        title,
         hyperlink,
         publication,
         date,
