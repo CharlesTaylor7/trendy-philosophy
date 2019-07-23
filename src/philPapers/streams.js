@@ -21,10 +21,10 @@ const escapeCharacter = char => {
 };
 const escape = token => token.split().map(escapeCharacter).join();
 
-const corsAnywhere = 'https://cors-anywhere.herokuapp.com';
+const corsAnywhere = 'https://cors-holy-water.herokuapp.com';
 
 const recordSet$ = (token) => fromFetch(
-  `${corsAnywhere}/https://philpapers.org/oai.pl?verb=ListRecords&metadataPrefix=oai_dc${token ? `&resumptionToken=${escape(token)}` : ''}`)
+  `${corsAnywhere}/philpapers.org/oai.pl?verb=ListRecords&metadataPrefix=oai_dc${token ? `&resumptionToken=${escape(token)}` : ''}`)
   .pipe(
     Rx.flatMap(response => response.text()),
     Rx.flatMap(text => {
@@ -77,12 +77,12 @@ export const record$ = recordSet$()
   );
 
 // ToDo: Figure out how to parse and decompress data from archive.
-const getDoc = id => fromFetch(`${corsAnywhere}/https://philpapers.org/archive/${id}`);
+const getDoc = id => fromFetch(`${corsAnywhere}/philpapers.org/archive/${id}`);
 
 const apiId = '904518';
 const apiKey = '5KLo4qkvXNl4t8s5';
 
-export const category$ = fromFetch(`${corsAnywhere}/https://philpapers.org/philpapers/raw/categories.json?apiId=${apiId}&apiKey=${apiKey}`)
+export const category$ = fromFetch(`${corsAnywhere}/philpapers.org/philpapers/raw/categories.json?apiId=${apiId}&apiKey=${apiKey}`)
   .pipe(
     Rx.flatMap(response => response.json()),
     Rx.map(array => array[0])

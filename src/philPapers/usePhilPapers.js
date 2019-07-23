@@ -14,16 +14,20 @@ export const usePhilPapers = () => {
     yearsToRecords: {},
   });
 
+
+
   useEffect(() => {
     record$.subscribe(record => {
-      const blackList = /^([0-9]+|s|the|of|on|and|to|in|at|for)$/
+      const blackList = /^([0-9]+|s|the|of|on|and|to|in|at|for)$/;
+      const splitOn = /[\s,.\-_'’]/;
+      const propNames = ['title', 'description'];
+
       const words = R.pipe(
-        R.prop('title'),
-        R.split(/[\s,.\-_'’]/),
+        R.chain(propName => record[propName].split(splitOn)),
         R.map(stem),
         R.filter(stem => !R.isEmpty(stem) && R.isEmpty(R.match(blackList, stem))),
         R.uniq,
-      )(record);
+      )(propNames);
 
       setState(state => {
         const { stemsToRecords, yearsToRecords, records } = state;
