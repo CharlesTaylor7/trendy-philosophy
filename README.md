@@ -1,8 +1,8 @@
 ## To Do
-- Query against paper descriptions in addition to the paper title
-- Implement screen scraping to get the publisher & citation info
+- Alternate data sources
 - Make query box
 - Allow queries to be more than 1 word
+- Implement screen scraping to get the publisher & citation info
 - Make smarter requests of PhilPapers.org
 - Show multiple trend lines
 - Calculate correlations
