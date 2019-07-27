@@ -11,11 +11,12 @@
 - Sync search queries with query parameters of the url.
 
 - Calculate correlations
-- Deal with nonresponsive choopy input
 - Introduce autocompletions
 
 - Make font consistent between label & search query
 - Keep graph dimensions consistent even when there is no match on the query
+
+- Test use of persistent data structures to ease gc pressure: https://github.com/mikolalysenko/functional-red-black-tree
 
 ## Measurements
 - 100 records takes about 21.8 kB.
