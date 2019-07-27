@@ -1,7 +1,4 @@
-import { fromFetch } from 'rxjs/fetch';
-
 let corsAnywhere = 'https://cors-holy-water.herokuapp.com/';
-// let corsAnywhere = '';
 
 export const corsRequest = async url => {
   try {

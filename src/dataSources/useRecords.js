@@ -60,7 +60,7 @@ export const useRecords = (record$) => {
         };
       });
     });
-  }, []);
+  }, [record$]);
 
   return state;
 };
