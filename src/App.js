@@ -4,15 +4,16 @@ import { Graph } from './components/Graph';
 import { record$ } from './dataSources/philosophyPaperboy';
 
 export const App = () => {
-  const query = 'good';
-  useEffect(() => {
-    record$.subscribe(foo => console.log(foo));
-  })
+  const query = 'family';
   return (
     <div className="App">
       <header className="App-header">
-        {/* <p>Trending: "{query}"</p> */}
-        <Graph query={query} yearRange={[2000, 2018]}/>
+        <p>Trending: "{query}"</p>
+        <Graph
+          query={query}
+          record$={record$}
+          yearRange={[2000, 2018]}
+        />
       </header>
     </div>
   );

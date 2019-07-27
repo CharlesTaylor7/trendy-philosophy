@@ -55,9 +55,8 @@ const getRecordMetadata = record => {
   metadata.id = getLastPartOfPath(metadata.identifier);
   delete metadata.identifier;
 
-  metadata.date = typeof metadata.date === 'number'
-    ? new Date(`January 1 ${metadata.date}`)
-    : metadata.date;
+  metadata.year = metadata.date;
+  delete metadata.date;
 
   metadata.type = getLastPartOfPath(metadata.type);
 

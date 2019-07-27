@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { record$ } from './philPapers';
 import * as R from 'ramda';
-import stem from 'lancaster-stemmer';
+import stemmer from 'lancaster-stemmer';
 
-export const usePhilPapers = () => {
+export const useRecords = (record$) => {
   // state: { lookup: { [stem: string]: RecordId[] }, recordCount: number }
   // where RecordId = string
   // a map from word stems to a list of records containing that stem.
@@ -16,14 +15,20 @@ export const usePhilPapers = () => {
 
   useEffect(() => {
     record$.subscribe(record => {
+      console.log(record);
       const blackList = /^([0-9]+|s|the|of|on|and|to|in|at|for)$/;
       const splitOn = /[\s,.\-_'’]/;
       const propNames = ['title', 'description'];
 
       const words = R.pipe(
-        R.chain(propName => record[propName].split(splitOn)),
-        R.map(stem),
-        R.filter(stem => !R.isEmpty(stem) && R.isEmpty(R.match(blackList, stem))),
+        R.chain(propName =>
+          record[propName]
+          ? record[propName].split(splitOn)
+          : []),
+        R.map(stemmer),
+        R.filter(stem =>
+          !R.isEmpty(stem) &&
+          R.isEmpty(R.match(blackList, stem))),
         R.uniq,
       )(propNames);
 
