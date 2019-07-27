@@ -1,8 +1,7 @@
 import parser from 'fast-xml-parser';
-import { fromFetch } from 'rxjs/fetch';
 import * as Rx from 'rxjs/operators';
 import * as Observable from 'rxjs';
-
+import { corsRequest } from './corsRequest';
 const xml = parser;
 
 const escapeCharacter = char => {
@@ -21,11 +20,14 @@ const escapeCharacter = char => {
 };
 const escape = token => token.split().map(escapeCharacter).join();
 
-// const corsAnywhere = 'https://cors-holy-water.herokuapp.com/';
-const corsAnywhere = '';
-
-const recordSet$ = (token) => fromFetch(
-  `${corsAnywhere}https://philpapers.org/oai.pl?verb=ListRecords&metadataPrefix=oai_dc${token ? `&resumptionToken=${escape(token)}` : ''}`)
+const getTokenSuffix = token =>
+  token
+  ? `&resumptionToken=${escape(token)}`
+  : '';
+const recordSet$ = (token) =>
+  Observable.from(
+    corsRequest(
+      `https://philpapers.org/oai.pl?verb=ListRecords&metadataPrefix=oai_dc${getTokenSuffix(token)}`))
   .pipe(
     Rx.flatMap(response => response.text()),
     Rx.flatMap(text => {
@@ -77,12 +79,15 @@ export const record$ = recordSet$()
   );
 
 // ToDo: Figure out how to parse and decompress data from archive.
-const getDoc = id => fromFetch(`${corsAnywhere}https://philPapers.org/archive/${id}`);
+const getDoc = id => Observable.from(corsRequest(`https://philPapers.org/archive/${id}`));
 
 const apiId = '904518';
 const apiKey = '5KLo4qkvXNl4t8s5';
 
-export const category$ = fromFetch(`${corsAnywhere}https://philPapers.org/philpapers/raw/categories.json?apiId=${apiId}&apiKey=${apiKey}`)
+export const category$ =
+  Observable.from(
+    corsRequest(
+      `https://philPapers.org/philpapers/raw/categories.json?apiId=${apiId}&apiKey=${apiKey}`))
   .pipe(
     Rx.flatMap(response => response.json()),
     Rx.map(array => array[0])

@@ -1,6 +1,7 @@
 import cheerio from 'cheerio'
-import { fromFetch } from 'rxjs/fetch';
+import { corsRequest } from './corsRequest';
 import * as Rx from 'rxjs/operators';
+import * as Observable from 'rxjs';
 
 const getPostId = text => text.match(/^post-(?<id>\d+)$/).groups.id;
 const getAuthorName = text => {
@@ -8,7 +9,9 @@ const getAuthorName = text => {
   return match ? match.groups.author : undefined;
 }
 
-export const record$ = fromFetch(`https://thephilosophypaperboy.com`)
+export const record$ = Observable.from(
+    corsRequest(`https://thephilosophypaperboy.com`)
+  )
   .pipe(
     Rx.flatMap(response => response.text()),
     Rx.map(cheerio.load),
