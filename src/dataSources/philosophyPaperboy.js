@@ -1,9 +1,6 @@
-// import { parse } from 'node-html-parser';
 import cheerio from 'cheerio'
 import { fromFetch } from 'rxjs/fetch';
 import * as Rx from 'rxjs/operators';
-import * as Observable from 'rxjs';
-// import * as R from 'ramda';
 
 const getPostId = text => text.match(/^post-(?<id>\d+)$/).groups.id;
 const getAuthorName = text => {

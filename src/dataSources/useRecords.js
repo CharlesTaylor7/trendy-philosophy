@@ -15,7 +15,6 @@ export const useRecords = (record$) => {
 
   useEffect(() => {
     record$.subscribe(record => {
-      console.log(record);
       const blackList = /^([0-9]+|s|the|of|on|and|to|in|at|for)$/;
       const splitOn = /[\s,.\-_'’]/;
       const propNames = ['title', 'description'];

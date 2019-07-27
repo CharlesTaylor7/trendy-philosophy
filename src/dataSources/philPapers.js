@@ -63,10 +63,6 @@ const getRecordMetadata = record => {
   metadata.author = metadata.creator;
   delete metadata.creator;
 
-  if (metadata.subject !== 'Philosophy'){
-    console.log(JSON.stringify(metadata));
-    debugger;
-  }
   return metadata;
 }
 

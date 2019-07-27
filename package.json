@@ -8,7 +8,6 @@
     "fast-xml-parser": "^3.12.17",
     "gh-pages": "^2.0.1",
     "lancaster-stemmer": "^1.0.4",
-    "node-html-parser": "^1.1.16",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
