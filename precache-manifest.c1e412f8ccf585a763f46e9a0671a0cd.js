@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "59d7a2f48602836afa4cd0acca3aaec1",
+    "revision": "a77bd8c34f7a2199ad669a7007836ec1",
     "url": "/trendy-philosophy/index.html"
   },
   {
-    "revision": "c2e6c11a840423dd9858",
+    "revision": "089a1fdad8364a909869",
     "url": "/trendy-philosophy/static/css/main.ba49ec77.chunk.css"
   },
   {
-    "revision": "36cb11864949b54c1bb9",
-    "url": "/trendy-philosophy/static/js/2.7c13ad10.chunk.js"
+    "revision": "e708078fb98fe4328f0e",
+    "url": "/trendy-philosophy/static/js/2.5803ea8a.chunk.js"
   },
   {
-    "revision": "c2e6c11a840423dd9858",
-    "url": "/trendy-philosophy/static/js/main.e68c76bd.chunk.js"
+    "revision": "089a1fdad8364a909869",
+    "url": "/trendy-philosophy/static/js/main.53f9c169.chunk.js"
   },
   {
     "revision": "29bdb43c85a0631ba61d",
