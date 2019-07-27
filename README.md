@@ -1,14 +1,21 @@
 ## To Do
-- Alternate data sources
+- Implement user toggles on data sources
 - Allow queries to be more than 1 word
 - Implement screen scraping to get the publisher & citation info from PhilPapers
 - Make smarter requests of PhilPapers.org
+
+- Provision a PostgreSQL table
+
 - Show multiple trend lines
+- Tab between search queries
+- Sync search queries with query parameters of the url.
+
 - Calculate correlations
 - Deal with nonresponsive choopy input
 - Introduce autocompletions
+
+- Make font consistent between label & search query
 - Keep graph dimensions consistent even when there is no match on the query
-- Input query as just an underline (no box)
 
 ## Measurements
 - 100 records takes about 21.8 kB.

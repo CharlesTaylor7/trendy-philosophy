@@ -14,10 +14,8 @@ export const corsRequest = async url => {
     if (response.status.toFixed(0)[0] !== 2) throw new Error();
   } catch {
     corsAnywhere = '';
-    debugger;
     console.log('Cors proxy failed.');
     response = await goFetch(url);
   }
-  debugger;
   return response;
 }
