@@ -60,6 +60,9 @@ const getRecordMetadata = record => {
 
   metadata.type = getLastPartOfPath(metadata.type);
 
+  metadata.author = metadata.creator;
+  delete metadata.creator;
+
   if (metadata.subject !== 'Philosophy'){
     console.log(JSON.stringify(metadata));
     debugger;
