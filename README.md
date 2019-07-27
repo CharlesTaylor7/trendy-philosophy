@@ -18,6 +18,8 @@
 
 - Test use of persistent data structures to ease gc pressure: https://github.com/mikolalysenko/functional-red-black-tree
 
+- Use stream for text input form
+
 ## Measurements
 - 100 records takes about 21.8 kB.
 - Takes about 1 second to make a rountrip request for 100 records.
