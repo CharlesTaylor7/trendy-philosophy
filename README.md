@@ -1,11 +1,13 @@
 ## To Do
 - Alternate data sources
-- Make query box
 - Allow queries to be more than 1 word
-- Implement screen scraping to get the publisher & citation info
+- Implement screen scraping to get the publisher & citation info from PhilPapers
 - Make smarter requests of PhilPapers.org
 - Show multiple trend lines
 - Calculate correlations
+- Deal with nonresponsive choopy input
+- Introduce autocompletions
+- Keep graph dimensions consistent even when there is no match on the query
 
 ## Measurements
 - 100 records takes about 21.8 kB.
