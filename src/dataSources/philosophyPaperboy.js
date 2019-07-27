@@ -1,5 +1,5 @@
 import cheerio from 'cheerio'
-import { corsRequest } from './corsRequest';
+import { observeCorsRequest } from './corsRequest';
 import * as Rx from 'rxjs/operators';
 import * as Observable from 'rxjs';
 
@@ -9,8 +9,8 @@ const getAuthorName = text => {
   return match ? match.groups.author : undefined;
 }
 
-export const record$ = Observable.from(
-    corsRequest(`https://thephilosophypaperboy.com`)
+export const record$ = observeCorsRequest(
+    `https://thephilosophypaperboy.com`
   )
   .pipe(
     Rx.flatMap(response => response.text()),

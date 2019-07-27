@@ -18,8 +18,6 @@ export const Graph = ({query, yearRange, record$}) => {
     yearsToRecords,
   } = useRecords(record$);
 
-  const recordCount = Object.keys(records).length;
-  console.log(recordCount);
   const recordIds = stemsToRecords[stem(query)];
   const data = recordIds
     ? R.pipe(

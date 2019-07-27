@@ -1,21 +1,9 @@
-let corsAnywhere = 'https://cors-holy-water.herokuapp.com/';
+import { fromFetch } from 'rxjs/fetch';
 
-const goFetch = url => fetch(`${corsAnywhere}${url}`, {
-  headers: {
-    // origin: 'localhost:3000'
-    'X-Requested-With': '*',
-  },
-});
+const corsAnywhere = 'https://cors-holy-water.herokuapp.com/';
 
-export const corsRequest = async url => {
-  let response;
-  try {
-    response = await goFetch(url);
-    if (response.status.toFixed(0)[0] !== 2) throw new Error();
-  } catch {
-    corsAnywhere = '';
-    console.log('Cors proxy failed.');
-    response = await goFetch(url);
-  }
-  return response;
-}
+const isProduction = process.env.NODE_ENV === "production";
+export const observeCorsRequest = url =>
+  isProduction
+  ? fromFetch(`${corsAnywhere}${url}`)
+  : fromFetch(url);
