@@ -45,7 +45,7 @@ export const Graph = ({query, yearRange, record$}) => {
       <Tooltip />
       <XAxis dataKey="year"/>
       <YAxis />
-      <Line type="linear" dataKey="records" stroke ="#8484d8" label={<Label />}/>
+      <Line type="linear" dataKey="percentage" stroke ="#8484d8" label={<Label />}/>
     </LineChart>
   );
 }
