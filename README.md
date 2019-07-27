@@ -8,6 +8,7 @@
 - Deal with nonresponsive choopy input
 - Introduce autocompletions
 - Keep graph dimensions consistent even when there is no match on the query
+- Input query as just an underline (no box)
 
 ## Measurements
 - 100 records takes about 21.8 kB.
