@@ -14,7 +14,7 @@ const colorMap = {
 };
 
 export const App = () => {
-  const [ queries, setQueries ] = useUrlSearchParams({});
+  const [ queries, setQueries ] = useUrlSearchParams({q0: 'good', q1: 'governance'});
 
   const addQuery = query =>
     setQueries(queries => ({
