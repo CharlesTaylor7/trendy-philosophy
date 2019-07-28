@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import * as R from 'ramda';
 import stemmer from 'lancaster-stemmer';
 
-const blackList = /^([0-9]+|s|the|of|on|and|to|in|at|for)$/;
-const splitOn = /[\s,.\-_'’]/;
+const blackList = /^([0-9]+|s|a|aa|at|an|the|of|on|and|to|in|for)$/;
+const splitOn = /[\-\[\]\s,.–_'’();:/"”]/;
 const propNames = ['title', 'description'];
 const getWords = record =>
   R.pipe(

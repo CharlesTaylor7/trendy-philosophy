@@ -80,8 +80,8 @@ export const recordSet$ = getRecordSet$()
         ),
     ),
   );
-recordSet$.subscribe(console.log);
-// ToDo: Figure out how to parse and decompress data from archive.
+
+  // ToDo: Figure out how to parse and decompress data from archive.
 const getDoc = id => observeCorsRequest(`https://philPapers.org/archive/${id}`);
 
 const apiId = '904518';
