@@ -1,23 +1,18 @@
 ## To Do
+- Improve performance by mutating data store directly and mutating dummy counter to trigger state changes.
 - Allow queries to be more than 1 word
-- User toggle between exact & fuzzy matching
-
-- Implement user toggles on data sources
-- Implement screen scraping to get the publisher & citation info from PhilPapers
-- Make smarter requests of PhilPapers.org
-
-- Provision a PostgreSQL table
-
 - Add color picker for each trendline
 - Implement add button for adding a new query
 - Implement delete button for deleting a query
-- Introduce autocompletions
 - Calculate correlations
-
 - Make font consistent between label & search query
-
-- Test use of persistent data structures to ease gc pressure: https://github.com/mikolalysenko/functional-red-black-tree
-
+- Make smarter requests of PhilPapers.org
+- User toggle between exact & fuzzy matching
+- Implement user toggles on data sources
+- Make word clouds
+- Implement screen scraping to get the publisher & citation info from PhilPapers
+- Provision a PostgreSQL table
+- Introduce autocompletions
 
 ## Measurements
 - 100 records takes about 21.8 kB.
