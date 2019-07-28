@@ -1,5 +1,4 @@
 ## To Do
-- Bug: Empty queries get briefly plotted as non zero when updating a different query.
 - Bug: Flickering of mouse cursor when hovering over query input
 - Calculate correlations
 - Implement add button for adding a new query
