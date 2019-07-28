@@ -6,12 +6,13 @@
 
 - Provision a PostgreSQL table
 
-- Show multiple trend lines
+- Autofocus to first empty query box
 - Tab between search queries
-- Sync search queries with query parameters of the url.
-
-- Calculate correlations
+- Add color picker for each trendline
+- Implement add button for adding a new query
+- Implement delete button for deleting a query
 - Introduce autocompletions
+- Calculate correlations
 
 - Make font consistent between label & search query
 - Keep graph dimensions consistent even when there is no match on the query
