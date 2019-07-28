@@ -1,9 +1,10 @@
 ## To Do
+- Stop labels from flashing on & off.
 - Allow queries to be more than 1 word
+- Calculate correlations
 - Add color picker for each trendline
 - Implement add button for adding a new query
 - Implement delete button for deleting a query
-- Calculate correlations
 - Make font consistent between label & search query
 - Make smarter requests of PhilPapers.org
 - User toggle between exact & fuzzy matching
