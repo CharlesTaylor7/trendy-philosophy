@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecords } from '../dataSources/useRecords';
+import { useRecordSets as useRecordSets } from '../dataSources/useRecords';
 import {
   LineChart,
   XAxis,
@@ -10,13 +10,13 @@ import {
 import * as R from 'ramda';
 import stem from 'lancaster-stemmer';
 
-export const Graph = ({ queries, yearRange, record$, colorMap }) => {
+export const Graph = ({ queries, yearRange, recordSet$, colorMap }) => {
   const [ start, end ] = yearRange;
   const {
     records,
     stemsToRecords,
     yearsToRecords,
-  } = useRecords(record$);
+  } = useRecordSets(recordSet$);
 
   const queryIds = Object.keys(queries);
   const getTotal = year => yearsToRecords[year]

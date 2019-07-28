@@ -24,7 +24,8 @@ const getTokenSuffix = token =>
   token
   ? `&resumptionToken=${escape(token)}`
   : '';
-const recordSet$ = (token) =>
+
+export const getRecordSet$ = (token) =>
   observeCorsRequest(
       `https://philpapers.org/oai.pl?verb=ListRecords&metadataPrefix=oai_dc${getTokenSuffix(token)}`)
   .pipe(
@@ -32,12 +33,12 @@ const recordSet$ = (token) =>
     Rx.flatMap(text => {
       const {
         record: records,
-        resumptionToken,
+        resumptionToken: token,
       } = xml.parse(text)['OAI-PMH'].ListRecords;
 
       return Observable.concat(
-        Observable.from(records),
-        recordSet$(resumptionToken)
+        [records],
+        getRecordSet$(token)
       );
     })
   );
@@ -67,16 +68,19 @@ const getRecordMetadata = record => {
   return metadata;
 }
 
-export const record$ = recordSet$()
+export const recordSet$ = getRecordSet$()
   .pipe(
-    Rx.map(getRecordMetadata),
-    Rx.filter(record =>
-      record.language === 'en' &&
-      record.title &&
-      typeof record.year === 'number'
+    Rx.map(recordSet =>
+      recordSet
+        .map(getRecordMetadata)
+        .filter(record =>
+          record.language === 'en' &&
+          record.title &&
+          typeof record.year === 'number'
+        ),
     ),
   );
-
+recordSet$.subscribe(console.log);
 // ToDo: Figure out how to parse and decompress data from archive.
 const getDoc = id => observeCorsRequest(`https://philPapers.org/archive/${id}`);
 

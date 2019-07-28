@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Graph } from './components/Graph';
 import { QueryInput } from './components/QueryInput';
-import { record$ } from './dataSources/philPapers';
+import { recordSet$ } from './dataSources/philPapers';
 import { useUrlSearchParams } from 'use-url-search-params';
 import * as R from 'ramda';
 
@@ -47,7 +47,7 @@ export const App = () => {
         <Graph
           queries={queries}
           colorMap={colorMap}
-          record$={record$}
+          recordSet$={recordSet$}
           yearRange={[2000, 2018]}
         />
       </header>

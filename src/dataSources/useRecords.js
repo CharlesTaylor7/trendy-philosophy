@@ -2,7 +2,23 @@ import { useState, useEffect } from 'react';
 import * as R from 'ramda';
 import stemmer from 'lancaster-stemmer';
 
-export const useRecords = (record$) => {
+const blackList = /^([0-9]+|s|the|of|on|and|to|in|at|for)$/;
+const splitOn = /[\s,.\-_'’]/;
+const propNames = ['title', 'description'];
+const getWords = record =>
+  R.pipe(
+    R.chain(propName =>
+      record[propName]
+      ? record[propName].split(splitOn)
+      : []),
+    R.map(stemmer),
+    R.filter(stem =>
+      !R.isEmpty(stem) &&
+      R.isEmpty(R.match(blackList, stem))),
+    R.uniq,
+  )(propNames);
+
+export const useRecordSets = (recordSet$) => {
   // state: { lookup: { [stem: string]: RecordId[] }, recordCount: number }
   // where RecordId = string
   // a map from word stems to a list of records containing that stem.
@@ -14,43 +30,35 @@ export const useRecords = (record$) => {
   });
 
   useEffect(() => {
-    record$.subscribe(record => {
-      const blackList = /^([0-9]+|s|the|of|on|and|to|in|at|for)$/;
-      const splitOn = /[\s,.\-_'’]/;
-      const propNames = ['title', 'description'];
-
-      const words = R.pipe(
-        R.chain(propName =>
-          record[propName]
-          ? record[propName].split(splitOn)
-          : []),
-        R.map(stemmer),
-        R.filter(stem =>
-          !R.isEmpty(stem) &&
-          R.isEmpty(R.match(blackList, stem))),
-        R.uniq,
-      )(propNames);
+    recordSet$.subscribe(recordSet => {
 
       setState(state => {
         const { stemsToRecords, yearsToRecords, records } = state;
 
-        const updatedRecords = {...records, [record.id]: record};
+        const updatedRecords = { ...records };
+        for (const record of recordSet) {
+          updatedRecords[record.id] = record;
+        }
 
         const stems = { ...stemsToRecords };
-        for (const word of words) {
-          if (stems[word] === undefined) {
-            stems[word] = [record.id];
-          } else {
-            stems[word] = [...stems[word], record.id];
+        for (const record of recordSet) {
+          for (const word of getWords(record)) {
+            if (stems[word] === undefined) {
+              stems[word] = [record.id];
+            } else {
+              stems[word] = [...stems[word], record.id];
+            }
           }
         }
 
         const years = { ...yearsToRecords };
-        const { year } = record;
-        if (years[year] === undefined) {
-          years[year] = [record.id];
-        } else {
-          years[year] = [...years[year], record.id];
+        for (const record of recordSet) {
+          const { year } = record;
+          if (years[year] === undefined) {
+            years[year] = [record.id];
+          } else {
+            years[year] = [...years[year], record.id];
+          }
         }
 
         return {
@@ -60,7 +68,7 @@ export const useRecords = (record$) => {
         };
       });
     });
-  }, [record$]);
+  }, [recordSet$]);
 
   return state;
 };
