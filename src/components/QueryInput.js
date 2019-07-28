@@ -2,19 +2,32 @@ import React, { useEffect, useMemo } from 'react';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-export const QueryInput = ({ index, setQuery, query }) => {
+export const QueryInput = ({ id, setQuery, query, color }) => {
 
   const input$ = useMemo(() => new Subject().pipe(debounceTime(400)), []);
   const onInput = input => input$.next(input);
-  useEffect(() => { input$.subscribe(q => setQuery(index, q)); }, [input$, setQuery, index]);
+  useEffect(() => {
+    input$.subscribe(q => setQuery(id, q));
+  }, [input$, setQuery, id]);
 
   return (
-    <label
-      onChange={e => onInput(e.target.value)}
-    >
+    <div
+      style={{
+        display: 'flex'
+      }}>
+      <div
+        style={{
+          height: '17px',
+          width: '17px',
+          borderRadius: '100%',
+          backgroundColor: color,
+          margin: '10px 20px',
+        }}
+      />
       Trend line for:
       <input
         type="text"
+        onChange={e => onInput(e.target.value)}
         defaultValue={query}
         style={{
           margin:'10px',
@@ -26,6 +39,6 @@ export const QueryInput = ({ index, setQuery, query }) => {
           borderBottom: '1px solid grey',
         }}
       />
-    </label>
+    </div>
   );
 };

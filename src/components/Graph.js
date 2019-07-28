@@ -10,7 +10,7 @@ import {
 import * as R from 'ramda';
 import stem from 'lancaster-stemmer';
 
-export const Graph = ({queries, yearRange, record$}) => {
+export const Graph = ({ queries, yearRange, record$, colorMap }) => {
   const [ start, end ] = yearRange;
   const {
     records,
@@ -63,7 +63,7 @@ export const Graph = ({queries, yearRange, record$}) => {
           <Line
             type="linear"
             dataKey={queryId}
-            stroke ="#8484d8"
+            stroke ={colorMap[queryId]}
             label={<Label />}
           />
         ))
