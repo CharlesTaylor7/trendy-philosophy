@@ -13,10 +13,14 @@ import stem from 'lancaster-stemmer';
 export const Graph = ({ queries, yearRange, recordSet$, colorMap }) => {
   const [ start, end ] = yearRange;
   const {
+    recordCount,
+    state,
+  } = useRecordSets(recordSet$);
+  const {
     records,
     stemsToRecords,
     yearsToRecords,
-  } = useRecordSets(recordSet$);
+  } = state.current;
 
   const queryIds = Object.keys(queries);
   const getTotal = year => yearsToRecords[year]
