@@ -6,7 +6,7 @@ import { record$ } from './dataSources/philPapers';
 import { useUrlSearchParams } from 'use-url-search-params';
 import * as R from 'ramda';
 export const App = () => {
-  const [ queries, setQueries ] = useUrlSearchParams({ q0: '' });
+  const [ queries, setQueries ] = useUrlSearchParams({ q0: 'good', q1: 'governance' });
 
   const addQuery = query =>
     setQueries(queries => ({
