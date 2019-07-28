@@ -41,8 +41,10 @@ export const Graph = ({ queries, yearRange, record$, colorMap }) => {
       const group = groupedByYear[year] || [];
       const dataPoint = R.pipe(
         R.map(queryId => {
+          const total = getTotal(year);
+          if (total === 0) return [queryId, 0];
           const containingQuery = R.filter(R.propEq('queryId', queryId), group);
-          const percentage = 100 * containingQuery.length / getTotal(year);
+          const percentage = 100 * containingQuery.length / total;
           return [queryId, percentage];
         }),
         R.fromPairs,
@@ -61,6 +63,7 @@ export const Graph = ({ queries, yearRange, record$, colorMap }) => {
       {queryIds
         .map(queryId => (
           <Line
+            key={queryId}
             type="linear"
             dataKey={queryId}
             stroke ={colorMap[queryId]}

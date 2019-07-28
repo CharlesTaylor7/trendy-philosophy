@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -10,13 +10,8 @@ export const QueryInput = ({ id, setQuery, query, color }) => {
     input$.subscribe(q => setQuery(id, q));
   }, [input$, setQuery, id]);
 
-  const tabIndex = new Number(id[1] + 1);
-
-  const inputRef = useRef({});
-  if (inputRef.current && tabIndex === 1) {
-    inputRef.current.focus();
-  }
-
+  const tabIndex = Number(id[1] + 1);
+  const autoFocus = tabIndex === 1;
   return (
     <div
       style={{
@@ -34,8 +29,8 @@ export const QueryInput = ({ id, setQuery, query, color }) => {
       />
       Trend line for:
       <input
-        ref={inputRef}
         tabIndex={tabIndex}
+        autoFocus={autoFocus}
         type="text"
         onChange={e => onInput(e.target.value)}
         defaultValue={query}
