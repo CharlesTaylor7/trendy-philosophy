@@ -3,7 +3,6 @@
 - Calculate correlations
 - Implement add button for adding a new query
 - Implement delete button for deleting a query
-- Make font consistent between label & search query
 - Add color picker for each trendline
 - Make smarter requests of PhilPapers.org
 - User toggle between exact & fuzzy matching
@@ -12,6 +11,11 @@
 - Implement screen scraping to get the publisher & citation info from PhilPapers
 - Provision a PostgreSQL table
 - Introduce autocompletions
+
+### Styling
+- Make font consistent between label & search query
+- Make margins on left & right side of screen equal
+- Make graph size dynamically match screen width
 
 ## Measurements
 - 100 records takes about 21.8 kB.
