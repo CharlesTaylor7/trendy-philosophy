@@ -1,5 +1,4 @@
 ## To Do
-- Improve performance by mutating data store directly and mutating dummy counter to trigger state changes.
 - Allow queries to be more than 1 word
 - Add color picker for each trendline
 - Implement add button for adding a new query

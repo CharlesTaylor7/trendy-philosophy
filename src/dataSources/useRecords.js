@@ -19,6 +19,11 @@ const getWords = record =>
   )(propNames);
 
 export const useRecordSets = (recordSet$) => {
+  // We've implemented our data store as a large mutable ref.
+  // We have no interest in old versions of the data
+  // and the constant copying & spreading caused significant slowdown.
+  // We track the total count of records with the useState hook to enforce that rerenders occur when new data is loaded.
+
   const state = useRef({
     records: {},
     stemsToRecords: {},
