@@ -8,7 +8,8 @@ import {
   Tooltip,
 } from 'recharts';
 import * as R from 'ramda';
-import stem from 'lancaster-stemmer';
+import stemmer from 'lancaster-stemmer';
+import { splitOn, blackList, propNames } from '../dataSources/textUtilities';
 
 export const Graph = ({ queries, yearRange, recordSet$, colorMap }) => {
   const [ start, end ] = yearRange;
@@ -27,14 +28,40 @@ export const Graph = ({ queries, yearRange, recordSet$, colorMap }) => {
     ? yearsToRecords[year].length
     : 0;
 
-  const getRecordIds = query => stemsToRecords[stem(query)] || [];
+  const getRecordIds = query => {
+    const recordIdSets = R.pipe(
+      R.split(splitOn),
+      R.map(stemmer),
+      R.filter(stem =>
+        !R.isEmpty(stem) &&
+        R.isEmpty(R.match(blackList, stem))),
+      R.map(stem => stemsToRecords[stem] || []),
+    )(query);
+    // using Array#.reduce instead of Ramda reduce
+    // because there's not a good seed argument I can provide.
+    return recordIdSets.length
+      ? recordIdSets.reduce(R.intersection)
+      : [];
+  };
+  const includesCaseInsensitive = (title, query) =>
+    title.toLowerCase().includes(query.toLowerCase());
+
+  const getRecords = query =>
+    R.pipe(
+      getRecordIds,
+      R.map(id => records[id]),
+      R.filter(record =>
+        R.any(prop =>
+          includesCaseInsensitive(record[prop], query), propNames)
+      ),
+    )(query)
 
   const groupedByYear = R.pipe(
     R.toPairs,
     R.chain(([queryId, query]) =>
       R.map(
-        id => ({ ...records[id], queryId }),
-        getRecordIds(query)
+        record => ({ ...record, queryId }),
+        getRecords(query)
       )
     ),
     R.groupBy(R.prop('year'))

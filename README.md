@@ -1,5 +1,4 @@
 ## To Do
-- Allow queries to be more than 1 word
 - Calculate correlations
 - Implement add button for adding a new query
 - Implement delete button for deleting a query
