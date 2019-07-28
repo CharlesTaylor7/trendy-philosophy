@@ -13,7 +13,8 @@ export const QueryInput = ({ id, setQuery, query, color }) => {
   return (
     <div
       style={{
-        display: 'flex'
+        display: 'flex',
+        alignItems: 'center',
       }}>
       <div
         style={{
@@ -21,7 +22,7 @@ export const QueryInput = ({ id, setQuery, query, color }) => {
           width: '17px',
           borderRadius: '100%',
           backgroundColor: color,
-          margin: '10px 20px',
+          margin: '0px 20px',
         }}
       />
       Trend line for:
