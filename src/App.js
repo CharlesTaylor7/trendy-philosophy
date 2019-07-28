@@ -37,7 +37,7 @@ export const App = () => {
           ))
         )(queries)}
         <Graph
-          query={queries.q0}
+          queries={queries}
           record$={record$}
           yearRange={[2000, 2018]}
         />

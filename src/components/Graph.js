@@ -18,34 +18,56 @@ export const Graph = ({queries, yearRange, record$}) => {
     yearsToRecords,
   } = useRecords(record$);
 
-  const recordIds = stemsToRecords[stem(query)];
-
+  const queryIds = Object.keys(queries);
   const getTotal = year => yearsToRecords[year]
     ? yearsToRecords[year].length
     : 0;
 
-  const data = recordIds
-    ? R.pipe(
-        R.map(id => records[id]),
-        R.groupBy(R.prop('year')),
-        R.toPairs,
-        R.filter(([year, _]) => year >= start && year <= end),
-        R.map(([year, group]) => ({
-          year,
-          percentage: 100 * group.length / getTotal(year),
-        })),
-        R.map(dataPoint => {
-          return { ...dataPoint, amt: dataPoint.percentage };
-        })
-      )(recordIds)
-    : [];
+  const getRecordIds = query => stemsToRecords[stem(query)] || [];
+
+  const groupedByYear = R.pipe(
+    R.toPairs,
+    R.chain(([queryId, query]) =>
+      R.map(
+        id => ({ ...records[id], queryId }),
+        getRecordIds(query)
+      )
+    ),
+    R.groupBy(R.prop('year'))
+  )(queries);
+
+  const data = R.map(
+    year => {
+      const group = groupedByYear[year] || [];
+      const dataPoint = R.pipe(
+        R.map(queryId => {
+          const containingQuery = R.filter(R.propEq('queryId', queryId), group);
+          const percentage = 100 * containingQuery.length / getTotal(year);
+          return [queryId, percentage];
+        }),
+        R.fromPairs,
+      )(queryIds);
+      dataPoint.year = year;
+      return dataPoint;
+    },
+    R.range(start, end + 1)
+  );
 
   return (
     <LineChart width={1200} height={500} data={data}>
       <Tooltip />
       <XAxis dataKey="year"/>
       <YAxis />
-      <Line type="linear" dataKey="percentage" stroke ="#8484d8" label={<Label />}/>
+      {queryIds
+        .map(queryId => (
+          <Line
+            type="linear"
+            dataKey={queryId}
+            stroke ="#8484d8"
+            label={<Label />}
+          />
+        ))
+      }
     </LineChart>
   );
 }
