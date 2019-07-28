@@ -9,7 +9,8 @@ import * as R from 'ramda';
 const colorMap = {
   q0: 'blue',
   q1: 'purple',
-  q2: 'grey',
+  q2: 'green',
+  q3: 'grey',
 };
 
 export const App = () => {
