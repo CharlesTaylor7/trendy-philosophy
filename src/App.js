@@ -1,28 +1,43 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React from 'react';
 import './App.css';
 import { Graph } from './components/Graph';
 import { QueryInput } from './components/QueryInput';
 import { record$ } from './dataSources/philPapers';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { useUrlSearchParams } from 'use-url-search-params';
-
+import * as R from 'ramda';
 export const App = () => {
-  const [ { query }, setParams ] = useUrlSearchParams({ query: '' });
-  const setQuery = query => setParams({query});
+  const [ queries, setQueries ] = useUrlSearchParams({ q0: '' });
 
-  const input$ = useMemo(() => new Subject().pipe(debounceTime(400)), []);
-  const onInput = input => input$.next(input);
-  useEffect(() => { input$.subscribe(q => setQuery(q)); }, [input$, setQuery]);
+  const addQuery = query =>
+    setQueries(queries => ({
+      ...queries,
+      [`q${Object.keys(queries).length}`]: query
+    }));
+
+  const setQuery = (index, query) => {
+    setQueries({
+      ...queries,
+      [index]: query,
+    });
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <QueryInput
-          defaultValue={query}
-          onInput={onInput}/>
+        {R.pipe(
+          R.toPairs,
+          R.map(([index, query]) => (
+            <QueryInput
+              autoFocus
+              key={index}
+              index={index}
+              setQuery={setQuery}
+              query={query}
+            />
+          ))
+        )(queries)}
         <Graph
-          query={query}
+          query={queries.q0}
           record$={record$}
           yearRange={[2000, 2018]}
         />

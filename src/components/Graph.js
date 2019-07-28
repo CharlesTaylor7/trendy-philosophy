@@ -10,7 +10,7 @@ import {
 import * as R from 'ramda';
 import stem from 'lancaster-stemmer';
 
-export const Graph = ({query, yearRange, record$}) => {
+export const Graph = ({queries, yearRange, record$}) => {
   const [ start, end ] = yearRange;
   const {
     records,
@@ -19,6 +19,11 @@ export const Graph = ({query, yearRange, record$}) => {
   } = useRecords(record$);
 
   const recordIds = stemsToRecords[stem(query)];
+
+  const getTotal = year => yearsToRecords[year]
+    ? yearsToRecords[year].length
+    : 0;
+
   const data = recordIds
     ? R.pipe(
         R.map(id => records[id]),
@@ -27,16 +32,13 @@ export const Graph = ({query, yearRange, record$}) => {
         R.filter(([year, _]) => year >= start && year <= end),
         R.map(([year, group]) => ({
           year,
-          percentage: 100 * group.length / yearsToRecords[year].length,
+          percentage: 100 * group.length / getTotal(year),
         })),
         R.map(dataPoint => {
           return { ...dataPoint, amt: dataPoint.percentage };
         })
       )(recordIds)
     : [];
-  const getTotal = year => yearsToRecords[year]
-    ? yearsToRecords[year].length
-    : 0;
 
   return (
     <LineChart width={1200} height={500} data={data}>
