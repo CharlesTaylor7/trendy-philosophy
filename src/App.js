@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import './App.css';
 import { Graph } from './components/Graph';
 import { QueryInput } from './components/QueryInput';
@@ -13,8 +13,14 @@ const colorMap = {
   q3: 'grey',
 };
 
+const defaultState = {q0: 'good', q1: 'governance'};
+
 export const App = () => {
-  const [ queries, setQueries ] = useUrlSearchParams({q0: 'good', q1: 'governance'});
+  const [, setUrlQuery ] = useUrlSearchParams(defaultState);
+  const [queries, setQueries ] = useState(defaultState);
+  useEffect(() => {
+    setUrlQuery(queries);
+  }, [queries]);
 
   const addQuery = query =>
     setQueries(queries => ({
@@ -22,28 +28,31 @@ export const App = () => {
       [`q${Object.keys(queries).length}`]: query
     }));
 
-  const setQuery = (queryId, query) => {
-    setQueries({
+  const setQuery = (queryId, query) =>
+    setQueries(queries => ({
       ...queries,
       [queryId]: query,
-    });
-  }
+    }));
 
+  const queryInputs = useMemo(() =>
+    R.pipe(
+      R.toPairs,
+      R.map(([queryId, query]) => (
+        <QueryInput
+          key={queryId}
+          id={queryId}
+          color={colorMap[queryId]}
+          query={query}
+          setQuery={setQuery}
+        />
+      ))
+    )(queries),
+    [queries]
+  );
   return (
     <div className="App">
       <header className="App-header">
-        {R.pipe(
-          R.toPairs,
-          R.map(([queryId, query]) => (
-            <QueryInput
-              key={queryId}
-              id={queryId}
-              color={colorMap[queryId]}
-              query={query}
-              setQuery={setQuery}
-            />
-          ))
-        )(queries)}
+        {queryInputs}
         <Graph
           queries={queries}
           colorMap={colorMap}

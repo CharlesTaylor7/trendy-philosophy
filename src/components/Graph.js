@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecordSets as useRecordSets } from '../dataSources/useRecords';
+import { useRecordSets as useRecordSets } from '../hooks/useRecords';
 import {
   LineChart,
   XAxis,

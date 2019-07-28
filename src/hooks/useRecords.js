@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import * as R from 'ramda';
 import stemmer from 'lancaster-stemmer';
-import { splitOn, blackList, propNames } from './textUtilities';
+import { splitOn, blackList, propNames } from '../dataSources/textUtilities';
 
 const getWords = record =>
   R.pipe(
