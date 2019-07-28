@@ -13,7 +13,8 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "recharts": "^1.6.2",
-    "rxjs": "^6.5.2"
+    "rxjs": "^6.5.2",
+    "use-url-search-params": "^2.3.8"
   },
   "scripts": {
     "start": "react-scripts start",

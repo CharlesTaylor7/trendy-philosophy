@@ -1,12 +1,13 @@
 import React from 'react';
 
-export const QueryInput = ({ onInput }) => (
+export const QueryInput = ({ onInput, defaultValue }) => (
   <label
     onChange={e => onInput(e.target.value)}
   >
     Trend line for:
     <input
       type="text"
+      defaultValue={defaultValue}
       autoFocus
       style={{
         margin:'10px',
