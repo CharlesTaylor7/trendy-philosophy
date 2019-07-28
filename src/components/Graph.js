@@ -71,6 +71,7 @@ export const Graph = ({ queries, yearRange, recordSet$, colorMap }) => {
             type="linear"
             dataKey={queryId}
             stroke ={colorMap[queryId]}
+            dots={false}
           />
         ))
       }
