@@ -37,9 +37,7 @@ export const useRecordSets = (recordSet$) => {
 
       for (const record of recordSet) {
         records[record.id] = record;
-      }
 
-      for (const record of recordSet) {
         for (const word of getWords(record)) {
           if (stemsToRecords[word] === undefined) {
             stemsToRecords[word] = [record.id];
@@ -47,9 +45,7 @@ export const useRecordSets = (recordSet$) => {
             stemsToRecords[word].push(record.id);
           }
         }
-      }
 
-      for (const record of recordSet) {
         const { year } = record;
         if (yearsToRecords[year] === undefined) {
           yearsToRecords[year] = [record.id];
