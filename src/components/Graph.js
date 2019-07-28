@@ -71,28 +71,9 @@ export const Graph = ({ queries, yearRange, recordSet$, colorMap }) => {
             type="linear"
             dataKey={queryId}
             stroke ={colorMap[queryId]}
-            label={<Label />}
           />
         ))
       }
     </LineChart>
   );
 }
-
-const Label = ({
-  x,
-  y,
-  stroke,
-  value,
-}) => (
-  <text
-    x={x}
-    y={y}
-    dy={-4}
-    fill={stroke}
-    fontSize={10}
-    textAnchor="middle"
-  >
-    {value}
-  </text>
-);

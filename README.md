@@ -1,5 +1,4 @@
 ## To Do
-- Stop labels from flashing on & off.
 - Allow queries to be more than 1 word
 - Calculate correlations
 - Add color picker for each trendline
