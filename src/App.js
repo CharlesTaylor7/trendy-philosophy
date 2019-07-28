@@ -36,7 +36,6 @@ export const App = () => {
           R.toPairs,
           R.map(([queryId, query]) => (
             <QueryInput
-              autoFocus
               key={queryId}
               id={queryId}
               color={colorMap[queryId]}

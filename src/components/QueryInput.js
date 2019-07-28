@@ -10,6 +10,7 @@ export const QueryInput = ({ id, setQuery, query, color }) => {
     input$.subscribe(q => setQuery(id, q));
   }, [input$, setQuery, id]);
 
+  const tabIndex = new Number(id[1] + 1);
   return (
     <div
       style={{
@@ -27,6 +28,8 @@ export const QueryInput = ({ id, setQuery, query, color }) => {
       />
       Trend line for:
       <input
+        tabIndex={tabIndex}
+        autoFocus={tabIndex === 1}
         type="text"
         onChange={e => onInput(e.target.value)}
         defaultValue={query}
