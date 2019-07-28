@@ -16,23 +16,19 @@ const colorMap = {
 const defaultState = {q0: 'good', q1: 'governance'};
 
 export const App = () => {
-  const [, setUrlQuery ] = useUrlSearchParams(defaultState);
-  const [queries, setQueries ] = useState(defaultState);
-  useEffect(() => {
-    setUrlQuery(queries);
-  }, [queries]);
+  const [ urlQuery, setUrlQuery ] = useUrlSearchParams(defaultState);
 
   const addQuery = query =>
-    setQueries(queries => ({
-      ...queries,
-      [`q${Object.keys(queries).length}`]: query
+    setUrlQuery(({
+      ...urlQuery,
+      [`q${Object.keys(urlQuery).length}`]: query
     }));
 
   const setQuery = (queryId, query) =>
-    setQueries(queries => ({
-      ...queries,
+    setUrlQuery({
+      ...urlQuery,
       [queryId]: query,
-    }));
+    });
 
   const queryInputs = useMemo(() =>
     R.pipe(
@@ -46,15 +42,15 @@ export const App = () => {
           setQuery={setQuery}
         />
       ))
-    )(queries),
-    [queries]
+    )(urlQuery),
+    [urlQuery]
   );
   return (
     <div className="App">
       <header className="App-header">
         {queryInputs}
         <Graph
-          queries={queries}
+          queries={urlQuery}
           colorMap={colorMap}
           recordSet$={recordSet$}
           yearRange={[2000, 2018]}
