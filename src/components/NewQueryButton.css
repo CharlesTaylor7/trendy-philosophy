@@ -2,6 +2,7 @@
 button {
   padding: 15px 25px;
   text-align: center;
+  font: inherit;
   cursor: pointer;
   outline: none;
   color: #fff;
@@ -9,6 +10,7 @@ button {
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
+  width: 120px;
 }
 
 button:hover {background-color: #3e8e41}
