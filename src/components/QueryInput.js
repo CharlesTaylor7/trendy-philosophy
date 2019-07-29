@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
+import './QueryInput.css';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -10,22 +11,13 @@ export const QueryInput = ({ id, setQuery, query, color }) => {
     input$.subscribe(q => setQuery(id, q));
   }, [input$, setQuery, id]);
 
-  const tabIndex = Number(id[1] + 1);
+  const tabIndex = Number(id.match(/^q(?<index>\d+)$/).groups.index) + 1;
   const autoFocus = tabIndex === 1;
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-      }}>
+    <div className="query">
       <div
-        style={{
-          height: '17px',
-          width: '17px',
-          borderRadius: '100%',
-          backgroundColor: color,
-          margin: '0px 20px',
-        }}
+        className="color-indicator"
+        style={{backgroundColor: color}}
       />
       <input
         tabIndex={tabIndex}

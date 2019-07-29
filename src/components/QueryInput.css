@@ -1,0 +1,11 @@
+.query {
+  display: flex;
+  align-items: center;
+}
+
+.color-indicator {
+  height: 17px;
+  width: 17px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
