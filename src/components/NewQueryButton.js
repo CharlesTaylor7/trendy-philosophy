@@ -6,7 +6,7 @@ export const NewQueryButton = ({ onClick }) => {
     <button
       onClick={onClick}
     >
-      <span>+ query</span>
+      + Query
     </button>
   )
 }
