@@ -9,8 +9,8 @@ export const useUrlQuery = initialQuery => {
       [queryId]: query,
     });
 
-  const addQuery = query =>
-    setQuery(`q${Object.keys(urlQuery).length}`, query);
+  const addQuery = () =>
+    setQuery(`q${Object.keys(urlQuery).length}`, '');
 
   const deleteQuery = queryId => {
     const { [queryId]: _, ...rest } = urlQuery;

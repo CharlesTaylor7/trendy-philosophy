@@ -10,9 +10,12 @@ const colorMap = {
   q1: 'purple',
   q2: 'green',
   q3: 'grey',
+  q4: 'pink',
+  q5: 'yellow',
 };
 
-const defaultState = {q0: 'good', q1: 'governance'};
+// const defaultState = {q0: 'good', q1: 'governance'};
+const defaultState = {};
 
 export const App = () => {
   const {

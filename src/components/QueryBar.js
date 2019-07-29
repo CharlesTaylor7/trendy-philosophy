@@ -24,13 +24,13 @@ export const QueryBar = ({
         />
       ))
     )(urlQuery),
-    [urlQuery]
+    [Object.values(urlQuery)]
   );
 
   return (
     <div className="query-bar">
       {queryInputs}
-      <NewQueryButton/>
+      <NewQueryButton onClick={addQuery}/>
     </div>
   );
 };
