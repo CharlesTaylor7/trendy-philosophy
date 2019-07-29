@@ -1,8 +1,7 @@
 ## To Do
-- Bug: Flickering of mouse cursor when hovering over query input
-- Calculate correlations
 - Implement add button for adding a new query
 - Implement delete button for deleting a query
+- Calculate correlations
 - Add color picker for each trendline
 - Make smarter requests of PhilPapers.org
 - User toggle between exact & fuzzy matching
@@ -13,6 +12,7 @@
 - Introduce autocompletions
 
 ### Styling
+- Fix flickering of mouse cursor when hovering over query input
 - Make font consistent between label & search query
 - Make margins on left & right side of screen equal
 - Make graph size dynamically match screen width

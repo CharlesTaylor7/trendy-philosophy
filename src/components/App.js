@@ -1,9 +1,10 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import './App.css';
-import { Graph } from './components/Graph';
-import { QueryInput } from './components/QueryInput';
-import { recordSet$ } from './dataSources/philPapers';
-import { useUrlSearchParams } from 'use-url-search-params';
+import { Graph } from './Graph';
+import { QueryInput } from './QueryInput';
+import { NewQueryButton } from './NewQueryButton';
+import { recordSet$ } from '../dataSources/philPapers';
+import { useUrlQuery } from '../hooks/useUrlQuery';
 import * as R from 'ramda';
 
 const colorMap = {
@@ -16,19 +17,12 @@ const colorMap = {
 const defaultState = {q0: 'good', q1: 'governance'};
 
 export const App = () => {
-  const [ urlQuery, setUrlQuery ] = useUrlSearchParams(defaultState);
-
-  const addQuery = query =>
-    setUrlQuery(({
-      ...urlQuery,
-      [`q${Object.keys(urlQuery).length}`]: query
-    }));
-
-  const setQuery = (queryId, query) =>
-    setUrlQuery({
-      ...urlQuery,
-      [queryId]: query,
-    });
+  const {
+    urlQuery,
+    addQuery,
+    setQuery,
+    deleteQuery
+  } = useUrlQuery(defaultState);
 
   const queryInputs = useMemo(() =>
     R.pipe(
@@ -49,6 +43,7 @@ export const App = () => {
     <div className="App">
       <header className="App-header">
         {queryInputs}
+        {/* <NewQueryButton/> */}
         <Graph
           queries={urlQuery}
           colorMap={colorMap}

@@ -27,21 +27,20 @@ export const QueryInput = ({ id, setQuery, query, color }) => {
           margin: '0px 20px',
         }}
       />
-      Trend line for:
       <input
         tabIndex={tabIndex}
         autoFocus={autoFocus}
         type="text"
-        onChange={e => onInput(e.target.value)}
+        onChange={event => onInput(event.target.value)}
+        placeholder="Search"
         defaultValue={query}
         style={{
           margin:'10px',
           border: 0,
           outline: 0,
-          fontSize: '16pt',
+          font: 'inherit',
           color: 'white',
           background: 'transparent',
-          borderBottom: '1px solid grey',
         }}
       />
     </div>
