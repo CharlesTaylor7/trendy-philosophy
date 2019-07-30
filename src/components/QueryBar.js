@@ -13,6 +13,7 @@ export const QueryBar = ({
   deleteQuery,
 }) => {
   const queryAsString = Object.values(urlQuery).join('&');
+  const queryCount = Object.keys(urlQuery).length;
   const queryInputs = useMemo(() =>
     R.pipe(
       R.toPairs,
@@ -26,8 +27,8 @@ export const QueryBar = ({
           deleteQuery={() => deleteQuery(queryId)}
         />
       ))
-    )(urlQuery)
-
+    )(urlQuery),
+    [queryAsString, queryCount]
   );
 
   return (
