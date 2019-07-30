@@ -3,6 +3,7 @@ import './QueryBar.css';
 import { Query } from './Query';
 import { NewQueryButton } from './NewQueryButton';
 import * as R from 'ramda';
+import { getNumberFromQueryId } from '../dataSources/textUtilities';
 
 export const QueryBar = ({
   colorMap,
@@ -18,15 +19,15 @@ export const QueryBar = ({
       R.map(([queryId, query]) => (
         <Query
           key={queryId}
-          tabIndex={Number(queryId.match(/^q(?<index>\d+)$/).groups.index) + 1}
+          tabIndex={getNumberFromQueryId(queryId) + 1}
           color={colorMap[queryId]}
           query={query}
           setQuery={query => setQuery(queryId, query)}
           deleteQuery={() => deleteQuery(queryId)}
         />
       ))
-    )(urlQuery),
-    [queryAsString]
+    )(urlQuery)
+
   );
 
   return (
