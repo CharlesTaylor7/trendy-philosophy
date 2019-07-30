@@ -1,8 +1,12 @@
 ## To Do
-- Implement add button for adding a new query
 - Implement delete button for deleting a query
+- Make styling of Add Query button consistent, no matter where it is on the screen.
+- Improve labeling. (Make it clear the y axis is percentages & the x axis is year numbers)
 - Calculate correlations
-- Add color picker for each trendline
+- Add color picker for each trendline (like the one in VS Code)
+- Fix flickering of mouse cursor when hovering over query input
+- Make margins on left & right side of screen equal
+- Make graph size dynamically match screen width
 - Make smarter requests of PhilPapers.org
 - User toggle between exact & fuzzy matching
 - Implement user toggles on data sources
@@ -12,10 +16,7 @@
 - Introduce autocompletions
 
 ### Styling
-- Fix flickering of mouse cursor when hovering over query input
-- Make font consistent between label & search query
-- Make margins on left & right side of screen equal
-- Make graph size dynamically match screen width
+
 
 ## Measurements
 - 100 records takes about 21.8 kB.
