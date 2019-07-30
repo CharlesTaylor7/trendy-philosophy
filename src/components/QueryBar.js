@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import './QueryBar.css';
-import { QueryInput } from './QueryInput';
+import { Query } from './Query';
 import { NewQueryButton } from './NewQueryButton';
 import * as R from 'ramda';
 
@@ -16,12 +16,13 @@ export const QueryBar = ({
     R.pipe(
       R.toPairs,
       R.map(([queryId, query]) => (
-        <QueryInput
+        <Query
           key={queryId}
           tabIndex={Number(queryId.match(/^q(?<index>\d+)$/).groups.index) + 1}
           color={colorMap[queryId]}
           query={query}
           setQuery={query => setQuery(queryId, query)}
+          deleteQuery={() => deleteQuery(queryId)}
         />
       ))
     )(urlQuery),

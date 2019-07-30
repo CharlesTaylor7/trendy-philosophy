@@ -1,20 +1,21 @@
-
-button {
+.button {
   text-align: center;
   font: inherit;
   cursor: pointer;
   outline: none;
-  color: #fff;
+  color: white;
   background-color: #4CAF50;
   border: none;
   border-radius: 15px;
-  box-shadow: 0 4px #999;
   padding: 0px 10px;
+  box-shadow: 0 4px #999;
 }
 
-button:hover {background-color: #3e8e41}
+.button:hover {
+  background-color: #3e8e41;
+}
 
-button:active {
+.button:active {
   background-color: #3e8e41;
   box-shadow: 0 2px #666;
   transform: translateY(4px);

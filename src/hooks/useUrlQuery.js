@@ -14,6 +14,7 @@ export const useUrlQuery = initialQuery => {
 
   const deleteQuery = queryId => {
     const { [queryId]: _, ...rest } = urlQuery;
+    debugger;
     setUrlQuery(rest);
   }
 
