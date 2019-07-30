@@ -9753,11 +9753,6 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-url-search-params@^2.3.8:
-  version "2.3.8"
-  resolved "https://registry.yarnpkg.com/use-url-search-params/-/use-url-search-params-2.3.8.tgz#315625221b461062a18c0a673f1d593aaf449272"
-  integrity sha512-XRudAPAqE1pEFEYIeiBcjiUVXgDi83fpTO0/xa0nCH7K8RWpXiTibOK9SGg2LtG8F0yLdP5n0CPhs61AmV4Q1A==
-
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
