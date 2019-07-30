@@ -11,6 +11,7 @@ export const QueryBar = ({
   addQuery,
   deleteQuery,
 }) => {
+  const queryAsString = Object.values(urlQuery).join('&');
   const queryInputs = useMemo(() =>
     R.pipe(
       R.toPairs,
@@ -24,7 +25,7 @@ export const QueryBar = ({
         />
       ))
     )(urlQuery),
-    [Object.values(urlQuery)]
+    [queryAsString]
   );
 
   return (
