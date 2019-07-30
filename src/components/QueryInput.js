@@ -11,7 +11,6 @@ export const QueryInput = ({ tabIndex, setQuery, query, color }) => {
     return () => subscription.unsubscribe();
   }, [input$]);
 
-  const autoFocus = tabIndex === 1;
   return (
     <div className="query">
       <div
@@ -20,7 +19,7 @@ export const QueryInput = ({ tabIndex, setQuery, query, color }) => {
       />
       <input
         tabIndex={tabIndex}
-        autoFocus={autoFocus}
+        autoFocus={tabIndex === 1}
         type="text"
         onChange={event => onInput(event.target.value)}
         placeholder="Search"
