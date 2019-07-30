@@ -9,7 +9,7 @@ export const QueryInput = ({ id, setQuery, query, color }) => {
   const onInput = input => input$.next(input);
   useEffect(() => {
     input$.subscribe(q => setQuery(id, q));
-  }, [input$, setQuery, id]);
+  }, [input$, id]);
 
   const tabIndex = Number(id.match(/^q(?<index>\d+)$/).groups.index) + 1;
   const autoFocus = tabIndex === 1;

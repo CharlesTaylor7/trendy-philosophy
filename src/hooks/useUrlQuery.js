@@ -1,8 +1,12 @@
 import { useUrlSearchParams } from 'use-url-search-params';
 
 export const useUrlQuery = initialQuery => {
-  const [urlQuery, setUrlQuery] = useUrlSearchParams(initialQuery);
+  const [urlQuery, setUrlQuery_] = useUrlSearchParams(initialQuery);
 
+  const setUrlQuery = query => {
+    console.log(query);
+    setUrlQuery_(query);
+  }
   const setQuery = (queryId, query) =>
     setUrlQuery({
       ...urlQuery,

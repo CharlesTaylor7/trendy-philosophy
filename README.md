@@ -1,7 +1,7 @@
 ## To Do
 - Implement delete button for deleting a query
-- Make styling of Add Query button consistent, no matter where it is on the screen.
 - Improve labeling. (Make it clear the y axis is percentages & the x axis is year numbers)
+- Make styling of Add Query button consistent, no matter where it is on the screen.
 - Calculate correlations
 - Add color picker for each trendline (like the one in VS Code)
 - Fix flickering of mouse cursor when hovering over query input
