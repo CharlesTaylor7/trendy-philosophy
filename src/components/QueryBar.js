@@ -18,10 +18,10 @@ export const QueryBar = ({
       R.map(([queryId, query]) => (
         <QueryInput
           key={queryId}
-          id={queryId}
+          tabIndex={Number(queryId.match(/^q(?<index>\d+)$/).groups.index) + 1}
           color={colorMap[queryId]}
           query={query}
-          setQuery={setQuery}
+          setQuery={query => setQuery(queryId, query)}
         />
       ))
     )(urlQuery),

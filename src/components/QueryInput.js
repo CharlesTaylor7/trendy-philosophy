@@ -3,15 +3,14 @@ import './QueryInput.css';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-export const QueryInput = ({ id, setQuery, query, color }) => {
-
+export const QueryInput = ({ tabIndex, setQuery, query, color }) => {
   const input$ = useMemo(() => new Subject().pipe(debounceTime(400)), []);
   const onInput = input => input$.next(input);
   useEffect(() => {
-    input$.subscribe(q => setQuery(id, q));
-  }, [input$, id]);
+    const subscription = input$.subscribe(setQuery);
+    return () => subscription.unsubscribe();
+  }, [input$]);
 
-  const tabIndex = Number(id.match(/^q(?<index>\d+)$/).groups.index) + 1;
   const autoFocus = tabIndex === 1;
   return (
     <div className="query">
