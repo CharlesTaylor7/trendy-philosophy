@@ -4,6 +4,7 @@ import { Graph } from './Graph';
 import { QueryBar } from './QueryBar';
 import { recordSet$ } from '../dataSources/philPapers';
 import { useUrlQuery } from '../hooks/useUrlQuery';
+import { useGraphData } from '../hooks/useGraphData';
 
 const colorMap = {
   q0: 'blue',
@@ -17,12 +18,18 @@ const colorMap = {
 const defaultState = {q0: 'good', q1: 'governance'};
 
 export const App = () => {
+
   const {
     urlQuery,
     addQuery,
     setQuery,
     deleteQuery
   } = useUrlQuery(defaultState);
+
+  const yearRange = [2010, 2019];
+  const data = useGraphData({ recordSet$, yearRange, queries: urlQuery });
+
+  const queryIds = Object.keys(urlQuery);
 
   return (
     <div className="App">
@@ -37,10 +44,9 @@ export const App = () => {
       </header>
       <footer className="footer">
         <Graph
-          queries={urlQuery}
+          queryIds={Object.keys(urlQuery)}
           colorMap={colorMap}
-          recordSet$={recordSet$}
-          yearRange={[2000, 2018]}
+          data={data}
         />
       </footer>
     </div>
