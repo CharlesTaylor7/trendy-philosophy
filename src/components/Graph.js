@@ -94,11 +94,12 @@ export const Graph = ({ queries, yearRange, recordSet$, colorMap }) => {
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data}>
           <Tooltip />
-          <XAxis dataKey="year" >
+          <XAxis dataKey="year" height={50} >
             <Label
               angle={0}
               value='year'
-              position='bottom'
+              position='insideTop'
+              offset={30}
               style={{textAnchor: 'middle'}}
             />
           </XAxis>

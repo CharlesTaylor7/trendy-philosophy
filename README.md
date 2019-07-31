@@ -2,7 +2,6 @@
 - Prevent whole graph from redrawing when adding a new query.
 - Calculate correlations
 - Add color picker for each trendline (like the one in VS Code)
-- Label x axis with year number.
 - Fix flickering of mouse cursor when hovering over query input
 - Make margins on left & right side of screen equal
 - Make graph size dynamically match screen width
