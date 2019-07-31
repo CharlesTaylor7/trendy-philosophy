@@ -1,10 +1,7 @@
 ## To Do
-- Prevent whole graph from redrawing when adding a new query.
 - Calculate correlations
 - Add color picker for each trendline (like the one in VS Code)
 - Fix flickering of mouse cursor when hovering over query input
-- Make margins on left & right side of screen equal
-- Make graph size dynamically match screen width
 - Make smarter requests of PhilPapers.org
 - User toggle between exact & fuzzy matching
 - Implement user toggles on data sources
