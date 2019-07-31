@@ -1,6 +1,9 @@
 import React from 'react';
+import "./Graph.css";
 import { useRecordSets } from '../hooks/useRecordSets';
 import {
+  ResponsiveContainer,
+  Label,
   LineChart,
   XAxis,
   YAxis,
@@ -48,7 +51,7 @@ export const Graph = ({ queries, yearRange, recordSet$, colorMap }) => {
 
   const getRecords = query =>
     R.pipe(
-      getRecordIds,
+    getRecordIds,
       R.map(id => records[id]),
       R.filter(record =>
         R.any(prop =>
@@ -87,22 +90,40 @@ export const Graph = ({ queries, yearRange, recordSet$, colorMap }) => {
   );
 
   return (
-    <LineChart width={1200} height={500} data={data}>
-      <Tooltip />
-      <XAxis dataKey="year"/>
-      <YAxis />
-      {queryIds
-        .map(queryId => (
-          <Line
-            key={queryId}
-            type="linear"
-            dataKey={queryId}
-            stroke ={colorMap[queryId]}
-            strokeWidth={3}
-            dot={false}
-          />
-        ))
-      }
-    </LineChart>
+    <div className="graph">
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={data}>
+          <Tooltip />
+          <XAxis dataKey="year" >
+            <Label
+              angle={0}
+              value='year'
+              position='bottom'
+              style={{textAnchor: 'middle'}}
+            />
+          </XAxis>
+          <YAxis>
+            <Label
+              angle={-90}
+              value='percentage (%)'
+              position='insideLeft'
+              style={{textAnchor: 'middle'}}
+            />
+          </YAxis>
+          {queryIds
+            .map(queryId => (
+              <Line
+                key={queryId}
+                type="linear"
+                dataKey={queryId}
+                stroke ={colorMap[queryId]}
+                strokeWidth={3}
+                dot={false}
+              />
+            ))
+          }
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 }

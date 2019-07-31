@@ -2,4 +2,5 @@
   display: grid;
   grid-template-rows: auto auto;
   grid-auto-flow: column;
+  margin: 10px 0
 }

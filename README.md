@@ -1,5 +1,4 @@
 ## To Do
-- Implement delete button for deleting a query
 - Improve labeling. (Make it clear the y axis is percentages & the x axis is year numbers)
 - Make styling of Add Query button consistent, no matter where it is on the screen.
 - Prevent whole graph from redrawing when adding a new query.
