@@ -26,19 +26,23 @@ export const App = () => {
 
   return (
     <div className="App">
-      <QueryBar
-        urlQuery={urlQuery}
-        setQuery={setQuery}
-        addQuery={addQuery}
-        deleteQuery={deleteQuery}
-        colorMap={colorMap}
-      />
-      <Graph
-        queries={urlQuery}
-        colorMap={colorMap}
-        recordSet$={recordSet$}
-        yearRange={[2000, 2018]}
-      />
+      <header className="header">
+        <QueryBar
+          urlQuery={urlQuery}
+          setQuery={setQuery}
+          addQuery={addQuery}
+          deleteQuery={deleteQuery}
+          colorMap={colorMap}
+        />
+      </header>
+      <footer className="footer">
+        <Graph
+          queries={urlQuery}
+          colorMap={colorMap}
+          recordSet$={recordSet$}
+          yearRange={[2000, 2018]}
+        />
+      </footer>
     </div>
   );
 }

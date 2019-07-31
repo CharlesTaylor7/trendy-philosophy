@@ -1,6 +1,7 @@
 .query {
   display: flex;
   align-items: center;
+  margin: 0 10px;
 }
 
 .query__color-indicator {

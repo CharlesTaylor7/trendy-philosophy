@@ -19,11 +19,13 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header {
+  height: 20vh;
+
+}
+
+.footer {
+  height: 80vh;
+  position: fixed;
+  top: 20vh;
 }
