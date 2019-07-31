@@ -1,5 +1,4 @@
 ## To Do
-- Make styling of Add Query button consistent, no matter where it is on the screen.
 - Prevent whole graph from redrawing when adding a new query.
 - Calculate correlations
 - Add color picker for each trendline (like the one in VS Code)
