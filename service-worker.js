@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/trendy-philosophy/precache-manifest.ef2824deb19ed6c9c88e923da3682898.js"
+  "/trendy-philosophy/precache-manifest.ff113c5789e196ada41f9874cea88738.js"
 );
 
 self.addEventListener('message', (event) => {
