@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ffe8cb229c7e61c9e24fca7740d26831",
+    "revision": "2c50942aa5669f2c5950af95069c6f92",
     "url": "/trendy-philosophy/index.html"
   },
   {
